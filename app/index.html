@@ -48,41 +48,9 @@
         <h2>
             PiDoorIntercom V0.0.1
         </h2>
-        <!--
-        <img class="handle-horizontal" src="/svg/handle_horizontal.svg">
-        <img class="handle-vertical" src="/svg/handle_horizontal.svg">
-        <img class="tb-connect" data-bind="click: connectDialog.show"
-                      rel="connect" src="/svg/applications-internet.svg">
-        <img class="tb-information" data-bind="click: connectionInfo.show"
-                      rel="information" src="/svg/information_icon.svg">
-        <div class="divider"></div>
-        <img class="tb-mute" data-bind="visible: !thisUser() || !thisUser().selfMute(),
-                              click: function () { requestMute(thisUser) }"
-                      rel="mute" src="/svg/audio-input-microphone.svg">
-        <img class="tb-unmute tb-active" data-bind="visible: thisUser() && thisUser().selfMute(),
-                              click: function () { requestUnmute(thisUser) }"
-                      rel="unmute" src="/svg/audio-input-microphone-muted.svg">
-        <img class="tb-deaf" data-bind="visible: !thisUser() || !thisUser().selfDeaf(),
-                              click: function () { requestDeaf(thisUser) }"
-                      rel="deaf" src="/svg/audio-output.svg">
-        <img class="tb-undeaf tb-active" data-bind="visible: thisUser() && thisUser().selfDeaf(),
-                              click: function () { requestUndeaf(thisUser) }"
-                      rel="undeaf" src="/svg/audio-output-deafened.svg">
-        <img class="tb-record" data-bind="click: function(){}"
-                      rel="record" src="/svg/media-record.svg">
-        <div class="divider"></div>
-        <img class="tb-comment" data-bind="click: commentDialog.show"
-                      rel="comment" src="/svg/toolbar-comment.svg">
-        <div class="divider"></div>
-        <img class="tb-settings" data-bind="click: settingsDialog.show"
-                      rel="settings" src="/svg/config_basic.svg">
-        <div class="divider"></div>
-        <img class="tb-sourcecode" data-bind="click: openSourceCode"
-                      rel="Source Code" src="/svg/source-code.svg">
-         -->
     </div>
-    <div class="stream">
-
+    <div class="stream-container">
+        <div class="stream"></div>
     </div>
     <!--
     <div class="chat">
@@ -126,7 +94,7 @@
     -->
     <script type="text/html" id="channel">
         <div class="channel" data-bind="
-            click: $root.select, 
+            click: $root.select,
             event: {
               dblclick: $root.requestMove.bind($root, $root.thisUser())
             },
@@ -208,6 +176,24 @@
     </script>
     <div class="channel-root-container" data-bind="if: root">
         <div class="channel-root" data-bind="template: {name: 'channel', data: root}"></div>
+    </div>
+    <div class="controls">
+        <img class="tb-mute" data-bind="visible: !thisUser() || !thisUser().selfMute(),
+                              click: function () {  }"
+             rel="mute" src="/svg/audio-input-microphone.svg">
+        <img class="tb-unmute tb-active" data-bind="visible: thisUser() && thisUser().selfMute(),
+                              click: function () {  }"
+             rel="unmute" src="/svg/audio-input-microphone-muted.svg">
+        <img class="tb-deaf" data-bind="visible: !thisUser() || !thisUser().selfDeaf(),
+                              click: function () {  }"
+             rel="deaf" src="/svg/audio-output.svg">
+        <img class="tb-undeaf tb-active" data-bind="visible: thisUser() && thisUser().selfDeaf(),
+                              click: function () {  }"
+             rel="undeaf" src="/svg/audio-output-deafened.svg">
+        <img src="/svg/filter.svg" class="pushtotalk" data-bind="event:{mousedown: function () { requestDeaf(thisUser); requestUnmute(thisUser);},
+                                                                   mouseup: function () { requestUndeaf(thisUser);requestMute(thisUser);},
+                                                                   touchstart: function () { requestDeaf(thisUser);requestUnmute(thisUser);},
+                                                                   touchend: function () { requestUndeaf(thisUser);requestMute(thisUser);}}">
     </div>
 </div>
 </body>

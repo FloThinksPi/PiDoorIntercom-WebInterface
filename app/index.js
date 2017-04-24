@@ -29,7 +29,7 @@ function ConnectDialog() {
     self.connect = function () {
         self.hide();
         setCookie("username", this.username(), 365);
-        ui.connect(self.username(), 'voice.johni0702.de', '443/demo', '')
+        ui.connect(self.username(), location.host , '443/mumble', '')
     }
 }
 
@@ -98,10 +98,10 @@ class GlobalBindings {
                     this.resetClient()
                 })
 
-                // Register all channels, recursively
+                // Register all channels, recursively - Deactiated, The Intercom only needs Root Chanel
                 const registerChannel = channel => {
                     this._newChannel(channel)
-                    channel.children.forEach(registerChannel)
+                    //channel.children.forEach(registerChannel)
                 }
                 registerChannel(client.root)
 
