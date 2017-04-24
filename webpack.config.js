@@ -1,4 +1,4 @@
-var theme = 'MetroMumbleLight'
+var theme = 'PiDoorIntercomStandartTheme'
 
 var path = require('path')
 

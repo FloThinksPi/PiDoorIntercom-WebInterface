@@ -1,14 +1,13 @@
 {
-  "name": "mumble-web",
+  "name": "PiDoorIntercom",
   "version": "0.0.1",
-  "description": "An HTML5 Mumble client.",
+  "description": "An HTML5 Intercom Client based on Jonas Herzigs mumble-web client",
   "scripts": {
     "build": "webpack",
     "dev": "node_modules/.bin/webpack-dev-server",
-    "prepublish": "rm -r dist && npm run build",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "Jonas Herzig <me@johni0702.de>",
+  "author": "Florian Braun <braunflorian94@gmail.com>",
   "license": "ISC",
   "repository": "johni0702/mumble-web",
   "homepage": "https://github.com/johni0702/mumble-web",
