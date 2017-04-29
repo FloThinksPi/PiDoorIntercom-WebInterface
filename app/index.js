@@ -10,7 +10,17 @@ import getUserMedia from 'getusermedia'
 import ko from 'knockout'
 import _dompurify from 'dompurify'
 
-const dompurify = _dompurify(window)
+const dompurify = _dompurify(window);
+
+// Productive
+ const mumblePort = '433'
+ const mumbleIP = location.host+'/mumble'
+ const streamURL = "/cam"
+
+// Development
+//const mumblePort = '433';
+//const mumbleIP = '10.110.109.33/mumble';
+//const streamURL = 'https://10.110.109.33/cam';
 
 function sanitize(html) {
     return dompurify.sanitize(html, {
@@ -29,7 +39,7 @@ function ConnectDialog() {
     self.connect = function () {
         self.hide();
         setCookie("username", this.username(), 365);
-        ui.connect(self.username(), location.host , '443/mumble', '')
+        ui.connect(self.username(), mumbleIP , mumblePort , '')
     }
 }
 
@@ -69,6 +79,7 @@ class GlobalBindings {
         this.root = ko.observable()
         this.messageBox = ko.observable('')
         this.selected = ko.observable()
+        this.mutestate = false;
 
         this.select = element => {
             this.selected(element)
@@ -344,11 +355,14 @@ class GlobalBindings {
 
         this.requestDeaf = user => {
             if (this.connected()) {
-                if (user === this.thisUser) {
-                    this.client.setSelfDeaf(true)
-                } else {
-                    user.model.setDeaf(true)
-                }
+
+                window.mutePage()
+
+        //        if (user === this.thisUser) {
+        //            this.client.setSelfDeaf(true)
+        //       } else {
+        //            user.model.setDeaf(true)
+        //        }
             }
         }
 
@@ -364,12 +378,49 @@ class GlobalBindings {
 
         this.requestUndeaf = user => {
             if (this.connected()) {
-                if (user === this.thisUser) {
-                    this.client.setSelfDeaf(false)
-                } else {
-                    user.model.setDeaf(false)
-                }
+                window.UnMutePage()
+        //        if (user === this.thisUser) {
+        //            this.client.setSelfDeaf(false)
+        //        } else {
+        //            user.model.setDeaf(false)
+        //        }
             }
+        }
+
+        this.muteElem = elem => {
+            elem.muted = true;
+        }
+        this.unMuteElem = elem =>{
+            elem.muted = false;
+        }
+
+
+
+        this.mutePage = () =>{
+
+            this.mutestate=false;
+
+            var videos = document.querySelectorAll("video"),
+                audios = document.querySelectorAll("audio");
+
+            [].forEach.call(videos, function(video) { unMuteMe(video); });
+            [].forEach.call(audios, function(audio) { unMuteMe(audio); });
+
+        }
+
+        this.unMutePage = () => {
+
+            this.mutestate=false;
+
+            var videos = document.querySelectorAll("video"),
+                audios = document.querySelectorAll("audio");
+
+            [].forEach.call(videos, function(video) { unMuteMe(video); });
+            [].forEach.call(audios, function(audio) { unMuteMe(audio); });
+        }
+
+        this.getMuteState = () => {
+            return this.mutestate;
         }
 
         this._updateLinks = () => {
@@ -418,6 +469,9 @@ var ui = new GlobalBindings()
 window.mumbleUi = ui
 
 window.onload = function () {
+
+    document.getElementById('stream').style.background = 'url('+streamURL+') no-repeat';
+
     var queryParams = url.parse(document.location.href, true).query
     if (queryParams.address) {
         ui.connectDialog.address(queryParams.address)
@@ -531,3 +585,9 @@ function getCookie(cname) {
     }
     return "";
 }
+
+
+
+
+
+

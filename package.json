@@ -3,8 +3,8 @@
   "version": "0.0.1",
   "description": "An HTML5 Intercom Client based on Jonas Herzigs mumble-web client",
   "scripts": {
-    "build": "webpack",
-    "dev": "node_modules/.bin/webpack-dev-server",
+    "build": "./node_modules/.bin/webpack",
+    "dev": "./node_modules/.bin/webpack-dev-server",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Florian Braun <braunflorian94@gmail.com>",

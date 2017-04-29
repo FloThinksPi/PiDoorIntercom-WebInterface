@@ -50,7 +50,7 @@
         </h2>
     </div>
     <div class="stream-container">
-        <div class="stream"></div>
+        <div id="stream"></div>
     </div>
     <!--
     <div class="chat">
@@ -184,16 +184,16 @@
         <img class="tb-unmute tb-active" data-bind="visible: thisUser() && thisUser().selfMute(),
                               click: function () {  }"
              rel="unmute" src="/svg/audio-input-microphone-muted.svg">
-        <img class="tb-deaf" data-bind="visible: !thisUser() || !thisUser().selfDeaf(),
+        <img class="tb-deaf" data-bind="visible: !thisUser() || !getMuteState(),
                               click: function () {  }"
              rel="deaf" src="/svg/audio-output.svg">
-        <img class="tb-undeaf tb-active" data-bind="visible: thisUser() && thisUser().selfDeaf(),
+        <img class="tb-undeaf tb-active" data-bind="visible: thisUser() && getMuteState(),
                               click: function () {  }"
              rel="undeaf" src="/svg/audio-output-deafened.svg">
-        <img src="/svg/filter.svg" class="pushtotalk" data-bind="event:{mousedown: function () { requestDeaf(thisUser); requestUnmute(thisUser);},
-                                                                   mouseup: function () { requestUndeaf(thisUser);requestMute(thisUser);},
-                                                                   touchstart: function () { requestDeaf(thisUser);requestUnmute(thisUser);},
-                                                                   touchend: function () { requestUndeaf(thisUser);requestMute(thisUser);}}">
+        <img src="/svg/filter.svg" class="pushtotalk" data-bind="event:{mouseup: function () {unMutePage(thisUser); requestMute(thisUser); },
+                                                                   mousedown: function () { mutePage(thisUser); requestUnmute(thisUser);},
+                                                                   touchstart: function () { mutePage(thisUser); requestUnmute(thisUser);},
+                                                                   touchend: function () { unMutePage(thisUser); requestMute(thisUser);}}">
     </div>
 </div>
 </body>

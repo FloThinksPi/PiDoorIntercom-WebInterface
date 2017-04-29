@@ -23,8 +23,7 @@ html, body {
     height: calc(100% - 38px);
 }
 
-.stream-container .stream{
-    background: url(/cam) no-repeat;
+.stream-container #stream{
     background-size: contain;
     width: 100%;
     height: 0;
